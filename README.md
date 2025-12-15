@@ -1,5 +1,8 @@
 # MediCare EMR - Appointment Scheduling & Queue Management
 
+## Live Demo
+**[View Live Application](https://medicare-emr-z1qb.vercel.app/)**
+
 ## Overview
 This project implements a comprehensive Appointment Scheduling and Queue Management system (Feature B) for an Electronic Medical Record (EMR) application. It features a responsive React frontend styled with Tailwind CSS and a simulated Python backend service logic.
 

@@ -1,5 +1,3 @@
-// This file mirrors the logic of appointment_service.py for the browser environment.
-
 const MOCK_DB = [
     {id: "1", patientName: "Alice Johnson", date: "2023-10-27", time: "09:00", duration: "30 min", doctorName: "Dr. Rath", status: "Scheduled", mode: "In-Person"},
     {id: "2", patientName: "Bob Williams", date: "2023-10-27", time: "10:30", duration: "45 min", doctorName: "Dr. Rath", status: "Scheduled", mode: "Virtual"},
@@ -12,41 +10,28 @@ const MOCK_DB = [
     {id: "9", patientName: "Ian Somerhalder", date: "2023-11-01", time: "10:00", duration: "60 min", doctorName: "Dr. Rath", status: "Scheduled", mode: "Virtual"},
     {id: "10", patientName: "Jane Doe", date: "2023-10-25", time: "15:00", duration: "30 min", doctorName: "Dr. Rath", status: "Scheduled", mode: "In-Person"},
 ];
-
 export const get_appointments = async (filters = {}) => {
-    // Simulating network delay
     await new Promise(resolve => setTimeout(resolve, 300));
-
     let result = [...MOCK_DB];
-
     if (filters.search) {
         const query = filters.search.toLowerCase();
         result = result.filter(appt => appt.patientName.toLowerCase().includes(query));
     }
-
     if (filters.date) {
         result = result.filter(appt => appt.date === filters.date);
     }
-
-    // Tab Logic Simulation (Backend usually handles this via complex queries, but we do it here for the mock)
-    const todayStr = "2023-10-27"; // Hardcoded "Today" for simulation consistency
-    
+    const todayStr = "2023-10-27";
     if (filters.tab === 'Upcoming') {
         result = result.filter(appt => appt.date > todayStr || (appt.date === todayStr && appt.status === 'Upcoming'));
     } else if (filters.tab === 'Past') {
         result = result.filter(appt => appt.date < todayStr);
     } else if (filters.tab === 'Today' && !filters.date) {
-        // Only enforce hardcoded 'Today' if no specific date filter is provided
         result = result.filter(appt => appt.date === todayStr);
     }
-
     return result;
 };
-
 export const update_appointment_status = async (id, newStatus) => {
-    // Simulating network delay
     await new Promise(resolve => setTimeout(resolve, 300));
-
     const index = MOCK_DB.findIndex(appt => appt.id === id);
     if (index !== -1) {
         MOCK_DB[index].status = newStatus;
@@ -54,25 +39,19 @@ export const update_appointment_status = async (id, newStatus) => {
     }
     return null;
 };
-
 export const create_appointment = async (newAppt) => {
-    // Simulating network delay
     await new Promise(resolve => setTimeout(resolve, 300));
     MOCK_DB.push(newAppt);
     return newAppt;
 };
-
 export const delete_appointment = async (id) => {
-    // Simulating network delay
     await new Promise(resolve => setTimeout(resolve, 300));
     const index = MOCK_DB.findIndex(appt => appt.id === id);
     if (index !== -1) {
         MOCK_DB.splice(index, 1);
     }
 };
-
 export const update_appointment_details = async (id, updates) => {
-    // Simulating network delay
     await new Promise(resolve => setTimeout(resolve, 300));
     const index = MOCK_DB.findIndex(appt => appt.id === id);
     if (index !== -1) {
